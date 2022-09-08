@@ -15,7 +15,15 @@ import requests
 import json
 import gspread
 from config import *
+import chromedriver_autoinstaller
+import os
+from dotenv import load_dotenv
 
+# init
+load_dotenv()
+spreadheet_url = os.getenv('SPREADSHEET_URL')
+starting_row = os.getenv('STARTING_ROW')
+api_key = os.getenv('API_KEY')
 
 
 def get_video_stats(video_id,api_key)-> list:
@@ -131,6 +139,7 @@ def get_delta(coin_name,time_delta,curr_date,driver):
 
 if __name__=="__main__":
   
+  chromedriver_autoinstaller.install()
 
   options = webdriver.ChromeOptions()
         
@@ -139,8 +148,6 @@ if __name__=="__main__":
       "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
   )
   options.add_argument('--no-sandbox')
-  # options.add_argument("window-size=1920,1080")
-  # options.add_argument('--disable-dev-shm-usage')
   options.add_argument('--headless')
   driver = webdriver.Chrome(options=options)
   driver.maximize_window()
