@@ -14,17 +14,9 @@ from datetime import datetime,timedelta
 import requests
 import json
 import gspread
-from config import *
 import chromedriver_autoinstaller
 import os
 from dotenv import load_dotenv
-
-# init
-load_dotenv()
-spreadheet_url = os.getenv('SPREADSHEET_URL')
-starting_row = os.getenv('STARTING_ROW')
-api_key = os.getenv('API_KEY')
-
 
 def get_video_stats(video_id,api_key)-> list:
   
@@ -138,7 +130,13 @@ def get_delta(coin_name,time_delta,curr_date,driver):
 
 
 if __name__=="__main__":
-  
+
+  # init
+  load_dotenv()
+  spreadheet_url = os.getenv('SPREADSHEET_URL')
+  starting_row = os.getenv('STARTING_ROW')
+  api_key = os.getenv('API_KEY')
+
   chromedriver_autoinstaller.install()
 
   options = webdriver.ChromeOptions()
